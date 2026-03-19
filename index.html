@@ -42,7 +42,7 @@ a{color:#00e5a0;}
 
 /* ── KPI cards ── */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin-bottom:2rem;}
-.kpi-card{background:#1a1a1f;border-radius:16px;padding:1.4rem 1.2rem;border:1px solid #2a2a35;position:relative;overflow:hidden;transition:transform 0.2s,border-color 0.2s;}
+.kpi-card{background:#1a1a1f;border-radius:16px;padding:1.4rem 1.2rem;border:1px solid #2a2a35;position:relative;overflow:visible;transition:transform 0.2s,border-color 0.2s;}
 .kpi-card:hover{transform:translateY(-3px);border-color:#00e5a040;}
 .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
 .kpi-card.up::before{background:#00e5a0;}
@@ -70,7 +70,7 @@ a{color:#00e5a0;}
 
 /* ── HIE cards ── */
 .hie-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem;}
-.hie-card{background:#1a1a1f;border-radius:16px;padding:1.2rem;border:1px solid #2a2a35;text-align:center;}
+.hie-card{background:#1a1a1f;border-radius:16px;padding:1.2rem;border:1px solid #2a2a35;text-align:center;overflow:visible;position:relative;}
 .hie-icon{font-size:1.4rem;margin-bottom:0.3rem;}
 .hie-label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#a0a0b0;margin-bottom:0.4rem;}
 .hie-value{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;}
@@ -261,12 +261,12 @@ function renderKPI(sessions, idx) {
   };
 
   const metrics = [
-    { key:'plMin',     icon:'⚡', label:'Player Load / min', unit:'AU/min', dec:2, hib:null },
-    { key:'hauteurCm', icon:'🦘', label:'Best Jump',          unit:'cm',     dec:0, hib:true  },
-    { key:'airTimeS',  icon:'⏱',  label:'Air Time',           unit:'s',      dec:3, hib:true  },
-    { key:'rHIE',      icon:'🔥', label:'HIE / min',          unit:'/min',   dec:1, hib:true  },
-    { key:'rCoD',      icon:'🔄', label:'CoD / min',          unit:'/min',   dec:1, hib:true  },
-    { key:'dureeMin',  icon:'⏲',  label:'Duration',           unit:'min',    dec:1, hib:null  },
+    { key:'plMin',     icon:'⚡', label:'Player Load / min', unit:'AU/min', dec:2, hib:null, tip:'Sum of all acceleration changes per minute. Compare only with your own history — hip placement gives lower values than trunk sensors.' },
+    { key:'hauteurCm', icon:'🦘', label:'Best Jump',          unit:'cm',     dec:0, hib:true,  tip:'Estimated from air time using free-fall physics: h = ½g(t/2)². Detected when acceleration drops near zero (weightlessness).' },
+    { key:'airTimeS',  icon:'⏱',  label:'Air Time',           unit:'s',      dec:3, hib:true,  tip:'Duration of the longest flight phase detected — the time the sensor reads near-zero gravity.' },
+    { key:'rHIE',      icon:'🔥', label:'HIE / min',          unit:'/min',   dec:1, hib:true,  tip:'Total high intensity events per minute (ACC + DEC + CoD). Elite handball reference ≈ 3.9 HIE/min (Luteberget 2017).' },
+    { key:'rCoD',      icon:'🔄', label:'CoD / min',          unit:'/min',   dec:1, hib:true,  tip:'Rapid hip rotations above 150°/s detected by gyroscope — pivots, feints, direction changes. Calibrate with the navette protocol.' },
+    { key:'dureeMin',  icon:'⏲',  label:'Duration',           unit:'min',    dec:1, hib:null,  tip:'Total session duration from first to last sample.' },
   ];
 
   const grid = document.getElementById('kpiGrid');
@@ -283,8 +283,10 @@ function renderKPI(sessions, idx) {
       ? `<div class="kpi-avg">avg: ${avgV.toFixed(m.dec)} ${m.unit}</div>`
       : '';
     const valStr = Number.isInteger(v) || m.dec === 0 ? Math.round(v) : v.toFixed(m.dec);
+    const tipHTML = m.tip ? `<span class="info-i" style="position:absolute;top:1rem;right:1rem;">i<span class="tip" style="right:0;left:auto;transform:none;">${m.tip}</span></span>` : '';
     return `
       <div class="kpi-card ${cardCls}">
+        ${tipHTML}
         <div class="kpi-icon">${m.icon}</div>
         <div class="kpi-label">${m.label}</div>
         <div class="kpi-value">${valStr}<span class="kpi-unit">${m.unit}</span></div>
@@ -329,13 +331,14 @@ function renderGauge(s) {
 // ── Render HIE cards ──
 function renderHIE(s) {
   const items = [
-    { icon:'🚀', label:'Accelerations', value:s.nACC, sub:`${s.rACC.toFixed(1)} /min` },
-    { icon:'🛑', label:'Decelerations', value:s.nDEC, sub:`${s.rDEC.toFixed(1)} /min` },
-    { icon:'🔄', label:'Dir. Changes',  value:s.nCoD, sub:`${s.rCoD.toFixed(1)} /min` },
-    { icon:'🔥', label:'Total HIE',     value:s.rHIE.toFixed(1), sub:'events/min' },
+    { icon:'🚀', label:'Accelerations', value:s.nACC, sub:`${s.rACC.toFixed(1)} /min`, tip:'Sudden surge in intensity — sprint start, explosive attack. Detected when acceleration magnitude increases sharply above 2.5 m/s².' },
+    { icon:'🛑', label:'Decelerations', value:s.nDEC, sub:`${s.rDEC.toFixed(1)} /min`, tip:'Abrupt drop in intensity — hard braking after a run. Very demanding on legs and knees. Detected when magnitude drops sharply.' },
+    { icon:'🔄', label:'Dir. Changes',  value:s.nCoD, sub:`${s.rCoD.toFixed(1)} /min`, tip:'Rapid hip rotation above 150°/s detected by gyroscope — pivots, feints, turns. Detected on raw gyro Z axis without smoothing.' },
+    { icon:'🔥', label:'Total HIE',     value:s.rHIE.toFixed(1), sub:'events/min',       tip:'All high intensity events combined per minute. Elite handball reference ≈ 3.9 HIE/min (Luteberget & Spencer 2017).' },
   ];
   document.getElementById('hieGrid').innerHTML = items.map(it => `
-    <div class="hie-card">
+    <div class="hie-card" style="position:relative;overflow:visible;">
+      <span class="info-i" style="position:absolute;top:0.75rem;right:0.75rem;font-size:9px;width:14px;height:14px;">i<span class="tip" style="right:0;left:auto;transform:none;width:220px;">${it.tip}</span></span>
       <div class="hie-icon">${it.icon}</div>
       <div class="hie-label">${it.label}</div>
       <div class="hie-value">${it.value}</div>
