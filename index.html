@@ -490,6 +490,12 @@ async function loadData() {
     if (!rows.length) throw new Error('No data found in sheet.');
 
     ALL_SESSIONS = rows.map((r, i) => rowToSession(r, i));
+    ALL_SESSIONS.sort((a, b) => {
+      const keyA = a.date + ' ' + a.heure;
+      const keyB = b.date + ' ' + b.heure;
+      return keyA > keyB ? 1 : keyA < keyB ? -1 : 0;
+    });
+    ALL_SESSIONS.forEach((s, i) => s.idx = i);
     CURRENT_IDX  = ALL_SESSIONS.length - 1; // default = latest session
 
     loading.style.display = 'none';
