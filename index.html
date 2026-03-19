@@ -491,11 +491,13 @@ async function loadData() {
 
     ALL_SESSIONS = rows.map((r, i) => rowToSession(r, i));
     ALL_SESSIONS.sort((a, b) => {
-      const keyA = a.date + ' ' + a.heure;
-      const keyB = b.date + ' ' + b.heure;
+      // Use chemin (file path) for sort — format: YYYY-MM-DD/HH-MM-SS-mmm/data_0.csv
+      // Fallback to date + heure if chemin is empty
+      const keyA = a.chemin || (a.date + ' ' + a.heure.replace('h','-'));
+      const keyB = b.chemin || (b.date + ' ' + b.heure.replace('h','-'));
       return keyA > keyB ? 1 : keyA < keyB ? -1 : 0;
     });
-    ALL_SESSIONS.forEach((s, i) => s.idx = i);
+    ALL_SESSIONS.forEach((s, i) => { s.idx = i; });
     CURRENT_IDX  = ALL_SESSIONS.length - 1; // default = latest session
 
     loading.style.display = 'none';
