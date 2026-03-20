@@ -187,8 +187,8 @@ function parseCSV(text) {
 
 function rowToSession(r, idx) {
   let top3 = [], profile = null;
-  try { top3 = JSON.parse(r['Top3 jumps (JSON)'] || '[]'); } catch(e) {}
-  try { profile = JSON.parse(r['Load profile (JSON)'] || 'null'); } catch(e) {}
+  try { top3 = JSON.parse((r['Top3 jumps (JSON)'] || '[]').replace(/\|/g, ',')); } catch(e) {}
+  try { profile = JSON.parse((r['Load profile (JSON)'] || 'null').replace(/\|/g, ',')); } catch(e) {}
   return {
     idx, chemin: r['Fichier source'] || '',
     date: r['Date'] || '', heure: r['Heure'] || '',
