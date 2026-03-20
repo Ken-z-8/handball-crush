@@ -536,9 +536,18 @@ async function loadData() {
   try {
     const resp = await fetch(SHEET_CSV_URL);
     if (!resp.ok) throw new Error('HTTP '+resp.status);
-    const rows = parseCSV(await resp.text());
+    const rawText = await resp.text();
+    const rows = parseCSV(rawText);
     if (!rows.length) throw new Error('No data found.');
+    // Debug: log first row keys and JSON columns
+    if (rows.length > 0) {
+      console.log('Headers found:', Object.keys(rows[0]));
+      console.log('Top3 raw:', rows[rows.length-1]['Top3 jumps (JSON)']);
+      console.log('Profile raw:', rows[rows.length-1]['Load profile (JSON)']);
+    }
     ALL_SESSIONS = rows.map((r,i) => rowToSession(r,i));
+    console.log('Last session top3:', ALL_SESSIONS[ALL_SESSIONS.length-1].top3);
+    console.log('Last session profile:', ALL_SESSIONS[ALL_SESSIONS.length-1].profile);
     ALL_SESSIONS.sort((a,b) => {
       const ka = a.chemin || (a.date+' '+a.heure.replace('h','-'));
       const kb = b.chemin || (b.date+' '+b.heure.replace('h','-'));
