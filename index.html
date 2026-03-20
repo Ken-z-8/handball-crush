@@ -9,46 +9,26 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0d0d0f;color:#f0f0f5;font-family:'DM Sans',sans-serif;min-height:100vh;padding:1.5rem;}
-a{color:#00e5a0;}
-
-/* ── Loading ── */
 #loadingScreen{position:fixed;inset:0;background:#0d0d0f;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999;gap:1rem;}
-#loadingScreen .logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;background:linear-gradient(135deg,#00e5a0,#00b8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-#loadingScreen .msg{color:#a0a0b0;font-size:0.9rem;letter-spacing:0.1em;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;background:linear-gradient(135deg,#00e5a0,#00b8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.msg{color:#a0a0b0;font-size:0.9rem;letter-spacing:0.1em;}
 .spinner{width:32px;height:32px;border:3px solid #2a2a35;border-top-color:#00e5a0;border-radius:50%;animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* ── Header ── */
 .header{text-align:center;margin-bottom:2rem;}
 .player-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,8vw,5rem);letter-spacing:0.05em;background:linear-gradient(135deg,#00e5a0,#00b8d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .header-meta{color:#a0a0b0;font-size:0.9rem;margin-top:0.25rem;letter-spacing:0.12em;text-transform:uppercase;}
 .session-badge{display:inline-block;background:#1a1a1f;border:1px solid #2a2a35;border-radius:20px;padding:0.3rem 1rem;font-size:0.8rem;color:#00e5a0;margin-top:0.5rem;letter-spacing:0.1em;}
-
-/* ── Config error ── */
-.config-error{background:#1a1a1f;border:1px solid #ff4757;border-radius:16px;padding:2rem;margin-bottom:2rem;text-align:center;}
-.config-error h2{color:#ff4757;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:0.75rem;}
-.config-error p{color:#a0a0b0;font-size:0.9rem;line-height:1.6;}
-.config-error code{background:#2a2a35;padding:0.2rem 0.5rem;border-radius:6px;font-size:0.85rem;color:#f0f0f5;}
-
-/* ── Session tabs ── */
 .session-tabs{display:flex;justify-content:center;gap:0.6rem;margin-bottom:2rem;flex-wrap:wrap;}
-.session-tab{background:#1a1a1f;border:1px solid #2a2a35;border-radius:12px;padding:0.5rem 1rem;color:#a0a0b0;cursor:pointer;font-size:0.82rem;font-weight:500;transition:all 0.2s;letter-spacing:0.05em;}
+.session-tab{background:#1a1a1f;border:1px solid #2a2a35;border-radius:12px;padding:0.5rem 1rem;color:#a0a0b0;cursor:pointer;font-size:0.82rem;font-weight:500;transition:all 0.2s;letter-spacing:0.05em;text-align:center;}
 .session-tab:hover{border-color:#00e5a060;color:#f0f0f5;}
 .session-tab.active{border-color:#00e5a0;color:#00e5a0;background:#00e5a010;}
-
-/* ── Section title ── */
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;color:#a0a0b0;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;}
 .section-title::after{content:'';flex:1;height:1px;background:#2a2a35;}
-
-/* ── KPI cards ── */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin-bottom:2rem;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1rem;margin-bottom:2rem;}
 .kpi-card{background:#1a1a1f;border-radius:16px;padding:1.4rem 1.2rem;border:1px solid #2a2a35;position:relative;overflow:visible;transition:transform 0.2s,border-color 0.2s;}
 .kpi-card:hover{transform:translateY(-3px);border-color:#00e5a040;}
 .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
-.kpi-card.up::before{background:#00e5a0;}
-.kpi-card.down::before{background:#ff4757;}
-.kpi-card.neutral::before{background:#a0a0b0;}
-.kpi-card.first::before{background:#5856d6;}
+.kpi-card.up::before{background:#00e5a0;}.kpi-card.down::before{background:#ff4757;}.kpi-card.neutral::before{background:#a0a0b0;}.kpi-card.first::before{background:#5856d6;}
 .kpi-icon{font-size:1.6rem;margin-bottom:0.4rem;}
 .kpi-label{font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:#a0a0b0;margin-bottom:0.6rem;}
 .kpi-value{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,5vw,3.2rem);line-height:1;color:#f0f0f5;}
@@ -56,76 +36,84 @@ a{color:#00e5a0;}
 .kpi-trend{margin-top:0.6rem;font-size:0.82rem;font-weight:500;}
 .kpi-trend.up{color:#00e5a0;}.kpi-trend.down{color:#ff4757;}.kpi-trend.neutral{color:#a0a0b0;}.kpi-trend.first{color:#5856d6;}
 .kpi-avg{font-size:0.72rem;color:#555;margin-top:0.2rem;}
-
-/* ── Player Load gauge ── */
+/* Jumps */
+.jumps-card{background:#1a1a1f;border-radius:16px;padding:1.4rem;border:1px solid #2a2a35;margin-bottom:2rem;}
+.jump-timeline{position:relative;height:8px;background:#2a2a35;border-radius:4px;margin:1.5rem 0 1rem;overflow:visible;}
+.jump-dot{position:absolute;width:16px;height:16px;border-radius:50%;top:50%;transform:translate(-50%,-50%);border:2px solid #0d0d0f;cursor:pointer;}
+.jump-dot .jump-tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#2a2a35;color:#f0f0f5;font-size:0.72rem;font-weight:500;padding:0.3rem 0.6rem;border-radius:8px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.2s;border:1px solid #3a3a4a;z-index:10;}
+.jump-dot:hover .jump-tip{opacity:1;}
+.jump-legend{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;margin-top:0.5rem;}
+.jump-legend-item{display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;}
+.jump-legend-dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
+.no-jumps{text-align:center;color:#a0a0b0;font-size:0.9rem;padding:1rem;}
+/* Gauge */
 .gauge-card{background:#1a1a1f;border-radius:16px;padding:1.4rem;border:1px solid #2a2a35;margin-bottom:2rem;}
 .gauge-bar{display:flex;height:22px;border-radius:11px;overflow:hidden;margin:1rem 0 0.4rem;position:relative;}
 .gauge-zone{height:100%;display:flex;align-items:center;justify-content:center;font-size:0.58rem;color:#0d0d0f;font-weight:700;letter-spacing:0.04em;}
-.gauge-marker{position:absolute;top:-9px;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:11px solid #f0f0f5;transition:left 0.6s ease;}
+.gauge-marker{position:absolute;top:-9px;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:11px solid #f0f0f5;}
 .gauge-labels{position:relative;height:1.2rem;margin-top:0.2rem;}
 .gauge-val{text-align:center;margin-top:0.75rem;}
 .gauge-val .big{font-family:'Bebas Neue',sans-serif;font-size:2rem;}
 .gauge-val .unit{color:#a0a0b0;font-size:0.85rem;}
 .zone-pill{display:inline-block;padding:0.15rem 0.6rem;border-radius:8px;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;margin-left:0.5rem;border:1px solid;}
-
-/* ── HIE cards ── */
-.hie-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;margin-bottom:2rem;}
+.gauge-note{text-align:center;font-size:0.7rem;color:#555;margin-top:0.5rem;}
+/* Intensity zones */
+.zones-card{background:#1a1a1f;border-radius:16px;padding:1.4rem;border:1px solid #2a2a35;margin-bottom:2rem;}
+.zone-row{display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;}
+.zone-lbl{width:50px;font-size:0.75rem;font-weight:700;letter-spacing:0.05em;text-align:right;}
+.zone-bar-bg{flex:1;height:18px;background:#2a2a35;border-radius:9px;overflow:hidden;}
+.zone-bar-fill{height:100%;border-radius:9px;transition:width 0.6s ease;}
+.zone-pct{width:45px;font-size:0.82rem;font-weight:500;}
+/* Load profile */
+.profile-card{background:#1a1a1f;border-radius:16px;padding:1.2rem;border:1px solid #2a2a35;margin-bottom:2rem;}
+.chart-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#a0a0b0;margin-bottom:1rem;}
+/* HIE */
+.hie-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:1rem;margin-bottom:2rem;}
 .hie-card{background:#1a1a1f;border-radius:16px;padding:1.2rem;border:1px solid #2a2a35;text-align:center;overflow:visible;position:relative;}
 .hie-icon{font-size:1.4rem;margin-bottom:0.3rem;}
 .hie-label{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#a0a0b0;margin-bottom:0.4rem;}
 .hie-value{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;}
 .hie-sub{font-size:0.72rem;color:#a0a0b0;margin-top:0.25rem;}
-
-/* ── Charts ── */
+/* Progress charts */
 .charts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-bottom:2rem;}
 .chart-card{background:#1a1a1f;border-radius:16px;padding:1.2rem;border:1px solid #2a2a35;}
-.chart-label{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#a0a0b0;margin-bottom:1rem;}
-
-/* ── History table ── */
+/* History */
 .history-card{background:#1a1a1f;border-radius:16px;padding:1.4rem;border:1px solid #2a2a35;margin-bottom:2rem;overflow-x:auto;}
 .history-table{width:100%;border-collapse:collapse;font-size:0.82rem;}
 .history-table th{text-align:left;font-weight:500;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:#a0a0b0;padding:0.6rem 0.8rem;border-bottom:1px solid #2a2a35;}
 .history-table td{padding:0.65rem 0.8rem;border-bottom:1px solid #1e1e24;color:#f0f0f5;white-space:nowrap;}
 .history-table tr:last-child td{border-bottom:none;}
-.history-table tr.selected-row td{background:#00e5a008;color:#f0f0f5;}
+.history-table tr.sel td{background:#00e5a008;}
 .history-table tr:hover td{background:#2a2a3540;cursor:pointer;}
 .load-pill{display:inline-block;padding:0.15rem 0.6rem;border-radius:20px;font-size:0.7rem;font-weight:700;}
-.pill-green{background:#00e5a015;color:#00e5a0;border:1px solid #00e5a040;}
-.pill-amber{background:#ffa50215;color:#ffa502;border:1px solid #ffa50240;}
-.pill-red{background:#ff475715;color:#ff4757;border:1px solid #ff475740;}
-
-/* ── Footer ── */
+.pill-g{background:#00e5a015;color:#00e5a0;border:1px solid #00e5a040;}
+.pill-a{background:#ffa50215;color:#ffa502;border:1px solid #ffa50240;}
+.pill-r{background:#ff475715;color:#ff4757;border:1px solid #ff475740;}
 .footer{text-align:center;margin-top:2rem;color:#3a3a4a;font-size:0.72rem;letter-spacing:0.07em;line-height:1.7;}
-
-/* ── Info tooltip ── */
-.info-i{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#2a2a35;color:#a0a0b0;font-size:10px;font-weight:700;font-style:italic;font-family:Georgia,serif;cursor:help;position:relative;vertical-align:middle;margin-left:5px;border:1px solid #3a3a4a;flex-shrink:0;}
-.info-i .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a1a1f;color:#d0d0d8;font-size:0.72rem;font-weight:400;font-style:normal;font-family:'DM Sans',sans-serif;padding:0.5rem 0.7rem;border-radius:10px;width:240px;line-height:1.5;opacity:0;pointer-events:none;transition:opacity 0.2s;border:1px solid #3a3a4a;z-index:100;text-align:left;}
-.info-i:hover .tip{opacity:1;}
+/* Info tooltip */
+.ii{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#2a2a35;color:#a0a0b0;font-size:10px;font-weight:700;font-style:italic;font-family:Georgia,serif;cursor:help;position:relative;vertical-align:middle;margin-left:5px;border:1px solid #3a3a4a;flex-shrink:0;}
+.ii .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a1a1f;color:#d0d0d8;font-size:0.72rem;font-weight:400;font-style:normal;font-family:'DM Sans',sans-serif;padding:0.5rem 0.7rem;border-radius:10px;width:240px;line-height:1.5;opacity:0;pointer-events:none;transition:opacity 0.2s;border:1px solid #3a3a4a;z-index:100;text-align:left;}
+.ii:hover .tip{opacity:1;}
+.config-error{background:#1a1a1f;border:1px solid #ff4757;border-radius:16px;padding:2rem;margin-bottom:2rem;text-align:center;}
+.config-error h2{color:#ff4757;font-family:'Bebas Neue',sans-serif;font-size:1.8rem;margin-bottom:0.75rem;}
+.config-error p{color:#a0a0b0;font-size:0.9rem;line-height:1.6;}
+code{background:#2a2a35;padding:0.2rem 0.5rem;border-radius:6px;font-size:0.85rem;}
 </style>
 </head>
 <body>
 
-<!-- ── CONFIGURATION ─────────────────────────────────────────────
-  1. In Google Sheets : File → Share → Publish to web → Sheet "Handball Crush — Sessions" → CSV → Publish
-  2. Copy the published URL and paste it as SHEET_CSV_URL below
-  3. Change PLAYER_NAME to your name
-──────────────────────────────────────────────────────────────── -->
 <script>
 const PLAYER_NAME   = "Kenza";
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_RLlrXD_sxjH2QYW2uqc3mfvMyd8NNwYH4lHgYG8OKFzZSzkESbYLukU8uth1bPK4zQNJfSu1UMVN/pub?gid=0&single=true&output=csv";
-// Example: "https://docs.google.com/spreadsheets/d/XXXX/pub?gid=0&single=true&output=csv"
 </script>
 
-<!-- Loading screen -->
 <div id="loadingScreen">
   <div class="logo">Handball Crush</div>
   <div class="spinner"></div>
   <div class="msg">Loading sessions...</div>
 </div>
 
-<!-- Main dashboard (hidden until data loaded) -->
 <div id="dashboard" style="display:none;">
-
   <div class="header">
     <div class="player-name" id="playerName"></div>
     <div class="header-meta" id="headerMeta"></div>
@@ -134,211 +122,297 @@ const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_RLlrXD
 
   <div class="session-tabs" id="sessionTabs"></div>
 
-  <div class="section-title">Key Metrics</div>
+  <div class="section-title">🏅 Key Metrics</div>
   <div class="kpi-grid" id="kpiGrid"></div>
 
-  <div class="section-title">Player Load / min
-    <span class="info-i">i<span class="tip">Total movement intensity per minute. Zones from Luteberget & Spencer 2017. Elite handball ≈ 8.8 AU/min (trunk sensor). Hip placement gives lower readings — compare with your own history only.</span></span>
+  <div class="section-title">🦘 Top 3 Jumps
+    <span class="ii">i<span class="tip">Top jumps ranked by height. Detected when acceleration drops near zero — free-fall physics: h = ½g(t/2)².</span></span>
+  </div>
+  <div class="jumps-card" id="jumpsCard"></div>
+
+  <div class="section-title">⚡ Player Load
+    <span class="ii">i<span class="tip">Corrected for sensor noise floor and hip-to-trunk placement (×0.5). Compare only with your own history — not with trunk-sensor literature values.</span></span>
   </div>
   <div class="gauge-card" id="gaugeCard"></div>
 
-  <div class="section-title">High Intensity Events
-    <span class="info-i">i<span class="tip">ACC = sudden acceleration burst. DEC = hard braking. CoD = rapid hip rotation above 150°/s (pivot, feint, direction change). Min 1s gap between events. Elite reference ≈ 3.9 HIE/min (Luteberget 2017).</span></span>
+  <div class="section-title">🎯 Intensity Zones
+    <span class="ii">i<span class="tip">Time distribution based on how far acceleration deviates from resting (1g). REST &lt;0.2g · LOW 0.2–0.5g · MOD 0.5–1g · HIGH 1–2g · MAX &gt;2g.</span></span>
+  </div>
+  <div class="zones-card" id="zonesCard"></div>
+
+  <div class="section-title">🔥 High Intensity Events
+    <span class="ii">i<span class="tip">ACC = sprint start. DEC = hard brake. CoD = rapid hip rotation &gt;150°/s. Min 1s gap. Elite ≈ 3.9 HIE/min (Luteberget 2017).</span></span>
   </div>
   <div class="hie-grid" id="hieGrid"></div>
 
-  <div class="section-title" id="progressTitle" style="display:none;">Progress Across Sessions</div>
+  <div class="section-title">📈 Session Load Profile
+    <span class="ii">i<span class="tip">Cumulative Player Load over time. Steep slopes = intense bursts. Flat plateaus = rest. Shows when effort happened during the session.</span></span>
+  </div>
+  <div class="profile-card" id="profileCard">
+    <div class="chart-label">⚡ Cumulative Player Load (AU)</div>
+    <div style="position:relative;height:200px;"><canvas id="profileChart"></canvas></div>
+  </div>
+
+  <div class="section-title" id="progressTitle" style="display:none;">📊 Progress Across Sessions</div>
   <div class="charts-grid" id="chartsGrid"></div>
 
-  <div class="section-title">Session History</div>
+  <div class="section-title">📋 Session History</div>
   <div class="history-card">
-    <table class="history-table" id="historyTable">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Duration</th>
-          <th>PL/min</th>
-          <th>Best Jump</th>
-          <th>Air time</th>
-          <th>ACC/min</th>
-          <th>DEC/min</th>
-          <th>CoD/min</th>
-          <th>HIE/min</th>
-          <th>Load</th>
-        </tr>
-      </thead>
+    <table class="history-table">
+      <thead><tr>
+        <th>Date</th><th>Time</th><th>Duration</th><th>PL/min</th><th>PL corrected</th>
+        <th>Best Jump</th><th>Active%</th><th>HIE/min</th><th>Load</th>
+      </tr></thead>
       <tbody id="historyBody"></tbody>
     </table>
   </div>
 
   <div class="footer">
-    Handball Crush Analytics &nbsp;·&nbsp; Sensor: WitMotion WT9011DCL-BT50 @ 50 Hz &nbsp;·&nbsp; Hip placement<br>
-    Player Load: Boyd et al. 2011 &nbsp;·&nbsp; HIE: Luteberget & Spencer 2017
+    Handball Crush Analytics &nbsp;·&nbsp; WitMotion WT9011DCL-BT50 @ 50 Hz · Hip placement<br>
+    Player Load: Boyd et al. 2011 &nbsp;·&nbsp; HIE: Luteberget & Spencer 2017 &nbsp;·&nbsp; PL corrected = (raw − noise) × 0.5
   </div>
 </div>
 
 <script>
-// ── Parse CSV string into array of objects ──
 function parseCSV(text) {
   const lines = text.trim().split('\n');
   const headers = lines[0].split(',').map(h => h.trim().replace(/\r/g,''));
   return lines.slice(1).map(line => {
     const vals = line.split(',').map(v => v.trim().replace(/\r/g,''));
     const obj = {};
-    headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
+    headers.forEach((h,i) => { obj[h] = vals[i] || ''; });
     return obj;
   }).filter(r => r['Date'] && r['Date'].length > 0);
 }
 
-// ── Map a CSV row to a session object ──
 function rowToSession(r, idx) {
+  let top3 = [], profile = null;
+  try { top3 = JSON.parse(r['Top3 jumps (JSON)'] || '[]'); } catch(e) {}
+  try { profile = JSON.parse(r['Load profile (JSON)'] || 'null'); } catch(e) {}
   return {
-    idx:       idx,
-    date:      r['Date'] || '',
-    heure:     r['Heure'] || '',
-    dureeMin:  parseFloat(r['Durée (min)']) || 0,
-    plTotal:   parseFloat(r['PL total (AU)']) || 0,
-    plMin:     parseFloat(r['PL/min (AU/min)']) || 0,
-    hauteurCm: parseFloat(r['Saut max (cm)']) || 0,
-    airTimeS:  parseFloat(r['Air time (s)']) || 0,
-    nACC:      parseInt(r['ACC']) || 0,
-    rACC:      parseFloat(r['ACC/min']) || 0,
-    nDEC:      parseInt(r['DEC']) || 0,
-    rDEC:      parseFloat(r['DEC/min']) || 0,
-    nCoD:      parseInt(r['CoD']) || 0,
-    rCoD:      parseFloat(r['CoD/min']) || 0,
-    rHIE:      parseFloat(r['HIE/min']) || 0,
-    chemin:    r['Fichier source'] || '',
+    idx, chemin: r['Fichier source'] || '',
+    date: r['Date'] || '', heure: r['Heure'] || '',
+    dureeMin:  parseFloat(r['Durée (min)'])    || 0,
+    plTotal:   parseFloat(r['PL total (AU)'])  || 0,
+    plMin:     parseFloat(r['PL/min (AU/min)'])|| 0,
+    plCorrige: parseFloat(r['PL corrigé (AU/min)']) || 0,
+    plNoise:   parseFloat(r['PL bruit (AU/min)'])   || 0,
+    hauteurCm: parseFloat(r['Saut max (cm)'])  || 0,
+    airTimeS:  parseFloat(r['Air time (s)'])   || 0,
+    nACC: parseInt(r['ACC'])||0,    rACC: parseFloat(r['ACC/min'])||0,
+    nDEC: parseInt(r['DEC'])||0,    rDEC: parseFloat(r['DEC/min'])||0,
+    nCoD: parseInt(r['CoD'])||0,    rCoD: parseFloat(r['CoD/min'])||0,
+    rHIE: parseFloat(r['HIE/min'])  || 0,
+    activeS:   parseFloat(r['Active time (s)'])|| 0,
+    activePct: parseFloat(r['Active %'])       || 0,
+    zREST: parseFloat(r['zone_REST %']) || 0,
+    zLOW:  parseFloat(r['zone_LOW %'])  || 0,
+    zMOD:  parseFloat(r['zone_MOD %'])  || 0,
+    zHIGH: parseFloat(r['zone_HIGH %']) || 0,
+    zMAX:  parseFloat(r['zone_MAX %'])  || 0,
+    top3, profile,
   };
 }
 
-// ── Player Load zone ──
 function plZone(v) {
-  if (v < 0.5)  return { label:'Warmup',    color:'#555566',  text:'#a0a0b0' };
-  if (v < 1.5)  return { label:'Light',     color:'#00b8d4',  text:'#00b8d4' };
-  if (v < 3.5)  return { label:'Technical', color:'#00e5a0',  text:'#00e5a0' };
-  if (v < 6.0)  return { label:'Match',     color:'#ffa502',  text:'#ffa502' };
-  return              { label:'Elite',     color:'#ff4757',  text:'#ff4757' };
+  if (v < 0.5)  return { label:'Warmup',    c:'#555566', t:'#a0a0b0' };
+  if (v < 1.5)  return { label:'Light',     c:'#00b8d4', t:'#00b8d4' };
+  if (v < 3.5)  return { label:'Technical', c:'#00e5a0', t:'#00e5a0' };
+  if (v < 6.0)  return { label:'Match',     c:'#ffa502', t:'#ffa502' };
+  return              { label:'Elite',     c:'#ff4757', t:'#ff4757' };
 }
 
-// ── Load category for history table ──
-function loadCategory(plMin) {
-  if (plMin < 1.5) return '<span class="load-pill pill-green">Low</span>';
-  if (plMin < 3.5) return '<span class="load-pill pill-amber">Med</span>';
-  return '<span class="load-pill pill-red">High</span>';
-}
-
-// ── Delta trend ──
-function delta(current, prev, higherIsBetter) {
+function delta(cur, prev, hib) {
   if (prev === null || prev === undefined || isNaN(prev)) return null;
-  const d = current - prev;
-  const pct = prev !== 0 ? Math.abs(d / prev * 100).toFixed(0) : null;
+  const d = cur - prev;
   if (Math.abs(d) < 0.01 * Math.abs(prev || 1)) return { cls:'neutral', text:'→ Same as prev' };
-  const positive = d > 0;
-  const good = higherIsBetter ? positive : !positive;
-  const cls = good ? 'up' : 'down';
-  const sign = positive ? '+' : '';
-  const pctStr = pct ? ` (${pct}%)` : '';
-  return { cls, text: `${positive ? '↑' : '↓'} ${sign}${d.toFixed(2)} vs prev${pctStr}` };
+  const pct = prev !== 0 ? Math.abs(d/prev*100).toFixed(0) : null;
+  const good = hib ? d > 0 : d < 0;
+  const cls  = good ? 'up' : 'down';
+  return { cls, text: `${d>0?'↑':'↓'} ${d>0?'+':''}${d.toFixed(2)} vs prev${pct ? ' ('+pct+'%)' : ''}` };
 }
 
-// ── Chart instances (to destroy on re-render) ──
-let chartInstances = [];
+function fmtTime(t) {
+  const m = Math.floor(t/60), s = Math.floor(t%60);
+  return m + ':' + String(s).padStart(2,'0');
+}
+
+let chartInstances = [], profileChartInst = null;
 function destroyCharts() {
-  chartInstances.forEach(c => c.destroy());
-  chartInstances = [];
+  chartInstances.forEach(c => c.destroy()); chartInstances = [];
+  if (profileChartInst) { profileChartInst.destroy(); profileChartInst = null; }
 }
 
-// ── Render KPI cards ──
+// ── KPI Cards ──
 function renderKPI(sessions, idx) {
-  const s    = sessions[idx];
-  const prev = idx > 0 ? sessions[idx - 1] : null;
-  const avg  = (key) => {
-    const past = sessions.slice(0, idx);
-    if (!past.length) return null;
-    return past.reduce((a, x) => a + x[key], 0) / past.length;
+  const s = sessions[idx], prev = idx > 0 ? sessions[idx-1] : null;
+  const avg = k => { const p = sessions.slice(0,idx); return p.length ? p.reduce((a,x)=>a+x[k],0)/p.length : null; };
+  const tips = {
+    plCorrige: 'Player Load corrected for sensor noise and hip-to-trunk placement (×0.5). Compare only with your own history.',
+    hauteurCm: 'Estimated from air time using free-fall: h = ½g(t/2)². Only jumps with airtime ≥ 0.15s counted.',
+    airTimeS:  'Duration of longest detected flight phase — time sensor reads near-zero gravity.',
+    activePct: 'Percentage of session time with significant movement (|mag − 1g| > 0.2g). A full match typically shows 40–50%.',
+    rCoD:      'Rapid hip rotations above 150°/s (pivots, feints, direction changes). Calibrate threshold with the navette protocol.',
   };
-
   const metrics = [
-    { key:'plMin',     icon:'⚡', label:'Player Load / min', unit:'AU/min', dec:2, hib:null, tip:'Sum of all acceleration changes per minute. Compare only with your own history — hip placement gives lower values than trunk sensors.' },
-    { key:'hauteurCm', icon:'🦘', label:'Best Jump',          unit:'cm',     dec:0, hib:true,  tip:'Estimated from air time using free-fall physics: h = ½g(t/2)². Detected when acceleration drops near zero (weightlessness).' },
-    { key:'airTimeS',  icon:'⏱',  label:'Air Time',           unit:'s',      dec:3, hib:true,  tip:'Duration of the longest flight phase detected — the time the sensor reads near-zero gravity.' },
-    { key:'rHIE',      icon:'🔥', label:'HIE / min',          unit:'/min',   dec:1, hib:true,  tip:'Total high intensity events per minute (ACC + DEC + CoD). Elite handball reference ≈ 3.9 HIE/min (Luteberget 2017).' },
-    { key:'rCoD',      icon:'🔄', label:'CoD / min',          unit:'/min',   dec:1, hib:true,  tip:'Rapid hip rotations above 150°/s detected by gyroscope — pivots, feints, direction changes. Calibrate with the navette protocol.' },
-    { key:'dureeMin',  icon:'⏲',  label:'Duration',           unit:'min',    dec:1, hib:null,  tip:'Total session duration from first to last sample.' },
+    { key:'plCorrige', icon:'⚡', label:'Player Load / min', unit:'AU/min', dec:3, hib:null },
+    { key:'hauteurCm', icon:'🦘', label:'Best Jump',          unit:'cm',     dec:0, hib:true  },
+    { key:'airTimeS',  icon:'⏱',  label:'Air Time',           unit:'s',      dec:3, hib:true  },
+    { key:'activePct', icon:'⏲',  label:'Active Time',        unit:'%',      dec:1, hib:true  },
+    { key:'rCoD',      icon:'🔄', label:'CoD / min',          unit:'/min',   dec:1, hib:true  },
   ];
-
-  const grid = document.getElementById('kpiGrid');
-  grid.innerHTML = metrics.map(m => {
-    const v      = s[m.key];
-    const prevV  = prev ? prev[m.key] : null;
-    const avgV   = avg(m.key);
-    const d      = delta(v, prevV, m.hib);
-    const cardCls = d ? d.cls : (idx === 0 ? 'first' : 'neutral');
-    const trendHTML = d
-      ? `<div class="kpi-trend ${d.cls}">${d.text}</div>`
-      : `<div class="kpi-trend first">🆕 First session</div>`;
-    const avgHTML = avgV !== null && idx > 1
-      ? `<div class="kpi-avg">avg: ${avgV.toFixed(m.dec)} ${m.unit}</div>`
-      : '';
-    const valStr = Number.isInteger(v) || m.dec === 0 ? Math.round(v) : v.toFixed(m.dec);
-    const tipHTML = m.tip ? `<span class="info-i" style="position:absolute;top:1rem;right:1rem;">i<span class="tip" style="right:0;left:auto;transform:none;">${m.tip}</span></span>` : '';
-    return `
-      <div class="kpi-card ${cardCls}">
-        ${tipHTML}
-        <div class="kpi-icon">${m.icon}</div>
-        <div class="kpi-label">${m.label}</div>
-        <div class="kpi-value">${valStr}<span class="kpi-unit">${m.unit}</span></div>
-        ${trendHTML}
-        ${avgHTML}
-      </div>`;
+  document.getElementById('kpiGrid').innerHTML = metrics.map(m => {
+    const v     = s[m.key];
+    const prevV = prev ? prev[m.key] : null;
+    const avgV  = avg(m.key);
+    const d     = delta(v, prevV, m.hib);
+    const cls   = d ? d.cls : (idx === 0 ? 'first' : 'neutral');
+    const trend = d ? `<div class="kpi-trend ${d.cls}">${d.text}</div>`
+                    : `<div class="kpi-trend first">🆕 First session</div>`;
+    const avgH  = avgV !== null && idx > 1 ? `<div class="kpi-avg">avg: ${avgV.toFixed(m.dec)} ${m.unit}</div>` : '';
+    const val   = m.dec === 0 ? Math.round(v) : v.toFixed(m.dec);
+    const tipH  = tips[m.key] ? `<span class="ii" style="position:absolute;top:0.9rem;right:0.9rem;">i<span class="tip" style="right:0;left:auto;transform:none;">${tips[m.key]}</span></span>` : '';
+    return `<div class="kpi-card ${cls}">${tipH}
+      <div class="kpi-icon">${m.icon}</div>
+      <div class="kpi-label">${m.label}</div>
+      <div class="kpi-value">${val}<span class="kpi-unit">${m.unit}</span></div>
+      ${trend}${avgH}
+    </div>`;
   }).join('');
 }
 
-// ── Render Player Load gauge ──
-function renderGauge(s) {
-  const SCALE_MAX = 12;
-  const zones = [
-    { l:'Warmup',    c:'#555566', start:0,   end:0.5 },
-    { l:'Light',     c:'#00b8d4', start:0.5, end:1.5 },
-    { l:'Technical', c:'#00e5a0', start:1.5, end:3.5 },
-    { l:'Match',     c:'#ffa502', start:3.5, end:6.0 },
-    { l:'Elite',     c:'#ff4757', start:6.0, end:12  },
-  ];
-  const mp  = Math.min(s.plMin / SCALE_MAX * 100, 97);
-  const z   = plZone(s.plMin);
-  const bar = zones.map(z => {
-    const w = (z.end - z.start) / SCALE_MAX * 100;
-    return `<div class="gauge-zone" style="width:${w}%;background:${z.c};">${z.l}</div>`;
+// ── Top 3 Jumps ──
+function renderJumps(s) {
+  const c = document.getElementById('jumpsCard');
+  if (!s.top3 || !s.top3.length) { c.innerHTML = '<div class="no-jumps">No significant jumps detected this session</div>'; return; }
+  const cols = ['#f0f0f5','#00e5a0','#00b8d4'], medals = ['🥇','🥈','🥉'];
+  const mx = s.dureeMin * 60 || 1;
+  const dots = s.top3.map((j,i) => {
+    const pct = Math.min(j.t / mx * 100, 97);
+    return `<div class="jump-dot" style="left:${pct}%;background:${cols[i]};border-color:#0d0d0f;">
+      <div class="jump-tip">⏱ ${fmtTime(j.t)} — ${j.height_cm} cm</div>
+    </div>`;
   }).join('');
-  const bnd = [0, 0.5, 1.5, 3.5, 6, 12];
+  const legend = s.top3.map((j,i) => `
+    <div class="jump-legend-item">
+      <span class="jump-legend-dot" style="background:${cols[i]};"></span>
+      ${medals[i]} ${j.height_cm} cm &nbsp;<span style="color:#a0a0b0;font-size:0.75rem;">(${j.airtime}s @ ${fmtTime(j.t)})</span>
+    </div>`).join('');
+  c.innerHTML = `<div class="jump-timeline">${dots}</div><div class="jump-legend">${legend}</div>`;
+}
+
+// ── Gauge ──
+function renderGauge(s) {
+  const SCALE = 12;
+  const zones = [
+    {l:'Warmup',c:'#555566',s:0,e:0.5},{l:'Light',c:'#00b8d4',s:0.5,e:1.5},
+    {l:'Technical',c:'#00e5a0',s:1.5,e:3.5},{l:'Match',c:'#ffa502',s:3.5,e:6},{l:'Elite',c:'#ff4757',s:6,e:12}
+  ];
+  const v   = s.plCorrige || s.plMin;
+  const z   = plZone(v);
+  const mp  = Math.min(v/SCALE*100, 97);
+  const bar = zones.map(z => `<div class="gauge-zone" style="width:${(z.e-z.s)/SCALE*100}%;background:${z.c};">${z.l}</div>`).join('');
+  const bnd = [0,0.5,1.5,3.5,6,12];
   const lbls = bnd.map(b => {
-    const p = b / SCALE_MAX * 100;
-    const tx = p === 0 ? '0' : p >= 100 ? '-100%' : '-50%';
+    const p = b/SCALE*100;
+    const tx = p===0?'0':p>=100?'-100%':'-50%';
     return `<span style="position:absolute;left:${p}%;transform:translateX(${tx});font-size:0.68rem;color:#a0a0b0;">${b}</span>`;
   }).join('');
+  const corrNote = s.plCorrige > 0
+    ? `raw: ${s.plMin.toFixed(2)} − noise: ${s.plNoise.toFixed(3)} × 0.5 placement`
+    : `raw: ${s.plMin.toFixed(2)} AU/min (corrected data not yet available)`;
   document.getElementById('gaugeCard').innerHTML = `
     <div class="gauge-bar">${bar}<div class="gauge-marker" style="left:${mp}%"></div></div>
     <div class="gauge-labels">${lbls}</div>
     <div class="gauge-val">
-      <span class="big" style="color:${z.color}">${s.plMin.toFixed(2)}</span>
+      <span class="big" style="color:${z.c}">${v.toFixed(3)}</span>
       <span class="unit"> AU/min</span>
-      <span class="zone-pill" style="border-color:${z.color};color:${z.text};">${z.label.toUpperCase()}</span>
+      <span class="zone-pill" style="border-color:${z.c};color:${z.t};">${z.label.toUpperCase()}</span>
+    </div>
+    <div class="gauge-note">${corrNote}</div>`;
+}
+
+// ── Intensity Zones ──
+function renderZones(s) {
+  const zones = [
+    {k:'zMAX',  l:'MAX',  c:'#ff4757'}, {k:'zHIGH', l:'HIGH', c:'#ffa502'},
+    {k:'zMOD',  l:'MOD',  c:'#00e5a0'}, {k:'zLOW',  l:'LOW',  c:'#00b8d4'},
+    {k:'zREST', l:'REST', c:'#555566'},
+  ];
+  const bars = zones.map(z => `
+    <div class="zone-row">
+      <div class="zone-lbl" style="color:${z.c}">${z.l}</div>
+      <div class="zone-bar-bg"><div class="zone-bar-fill" style="width:${s[z.k]}%;background:${z.c};"></div></div>
+      <div class="zone-pct" style="color:${z.c}">${s[z.k]}%</div>
+    </div>`).join('');
+
+  const R=54,CX=64,CY=64,CIRC=2*Math.PI*R;
+  let offset=0, arcs='';
+  zones.slice().reverse().forEach(z => {
+    const len=CIRC*s[z.k]/100, gap=CIRC-len;
+    arcs+=`<circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="${z.c}" stroke-width="14" stroke-dasharray="${len} ${gap}" stroke-dashoffset="${-offset}" stroke-linecap="butt"/>`;
+    offset+=len;
+  });
+  const activePct = Math.round((100 - s.zREST)*10)/10;
+  const donut = `<div style="position:relative;width:140px;height:140px;flex-shrink:0;">
+    <svg viewBox="0 0 128 128" width="140" height="140" style="transform:rotate(-90deg);">
+      <circle cx="${CX}" cy="${CY}" r="${R}" fill="none" stroke="#2a2a35" stroke-width="14"/>
+      ${arcs}
+    </svg>
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;line-height:1;color:#f0f0f5;">${activePct}%</div>
+      <div style="font-size:0.65rem;color:#a0a0b0;letter-spacing:0.05em;">ACTIVE</div>
+    </div>
+  </div>`;
+
+  document.getElementById('zonesCard').innerHTML = `
+    <div style="display:flex;align-items:center;gap:2rem;flex-wrap:wrap;">
+      ${donut}
+      <div style="flex:1;min-width:200px;">${bars}</div>
     </div>`;
 }
 
-// ── Render HIE cards ──
+// ── Load Profile ──
+function renderProfile(s) {
+  if (profileChartInst) { profileChartInst.destroy(); profileChartInst = null; }
+  const card = document.getElementById('profileCard');
+  if (!s.profile || !s.profile.t || !s.profile.t.length) {
+    card.innerHTML = '<div style="text-align:center;color:#a0a0b0;padding:2rem;font-size:0.85rem;">Load profile not available for this session<br><span style="font-size:0.75rem;color:#555;">(Reprocess with Apps Script v2.0)</span></div>';
+    return;
+  }
+  card.innerHTML = '<div class="chart-label">⚡ Cumulative Player Load (AU)</div><div style="position:relative;height:200px;"><canvas id="profileChart"></canvas></div>';
+  const labels = s.profile.t.map(t => fmtTime(t));
+  const ctx = document.getElementById('profileChart').getContext('2d');
+  const grad = ctx.createLinearGradient(0,0,0,200);
+  grad.addColorStop(0,'rgba(0,229,160,0.3)'); grad.addColorStop(1,'rgba(0,229,160,0.02)');
+  profileChartInst = new Chart(ctx, {
+    type:'line',
+    data:{ labels, datasets:[{ data:s.profile.pl, borderColor:'#00e5a0', backgroundColor:grad,
+      borderWidth:2.5, pointRadius:0, tension:0.3, fill:true }] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{ backgroundColor:'#1a1a1f', borderColor:'#3a3a4a',
+        borderWidth:1, titleColor:'#a0a0b0', bodyColor:'#f0f0f5', displayColors:false,
+        callbacks:{ title:c=>'⏱ '+c[0].label, label:c=>c.parsed.y.toFixed(3)+' AU' } } },
+      scales:{
+        x:{ grid:{color:'#2a2a35'}, ticks:{color:'#a0a0b0',font:{size:10},maxTicksLimit:8} },
+        y:{ grid:{color:'#2a2a35'}, ticks:{color:'#a0a0b0',font:{size:10}}, beginAtZero:true,
+            title:{display:true,text:'AU',color:'#555',font:{size:10}} }
+      }
+    }
+  });
+}
+
+// ── HIE Cards ──
 function renderHIE(s) {
   const items = [
-    { icon:'🚀', label:'Accelerations', value:s.nACC, sub:`${s.rACC.toFixed(1)} /min`, tip:'Sudden surge in intensity — sprint start, explosive attack. Detected when acceleration magnitude increases sharply above 2.5 m/s².' },
-    { icon:'🛑', label:'Decelerations', value:s.nDEC, sub:`${s.rDEC.toFixed(1)} /min`, tip:'Abrupt drop in intensity — hard braking after a run. Very demanding on legs and knees. Detected when magnitude drops sharply.' },
-    { icon:'🔄', label:'Dir. Changes',  value:s.nCoD, sub:`${s.rCoD.toFixed(1)} /min`, tip:'Rapid hip rotation above 150°/s detected by gyroscope — pivots, feints, turns. Detected on raw gyro Z axis without smoothing.' },
-    { icon:'🔥', label:'Total HIE',     value:s.rHIE.toFixed(1), sub:'events/min',       tip:'All high intensity events combined per minute. Elite handball reference ≈ 3.9 HIE/min (Luteberget & Spencer 2017).' },
+    {icon:'🚀',label:'Accelerations',value:s.nACC,sub:`${s.rACC.toFixed(1)} /min`,tip:'Sudden surge — sprint start or attack. Detected when smoothed magnitude increases sharply above 2.5 m/s².'},
+    {icon:'🛑',label:'Decelerations',value:s.nDEC,sub:`${s.rDEC.toFixed(1)} /min`,tip:'Hard braking after a run. Very demanding on legs and knees. Detected when smoothed magnitude drops sharply.'},
+    {icon:'🔄',label:'Dir. Changes', value:s.nCoD,sub:`${s.rCoD.toFixed(1)} /min`,tip:'Rapid hip rotation above 150°/s — pivots, feints, turns. Detected on raw gyro Z without smoothing.'},
+    {icon:'🔥',label:'Total HIE',    value:s.rHIE.toFixed(1),sub:'events/min',      tip:'All events combined per minute. Elite handball reference ≈ 3.9 HIE/min (Luteberget & Spencer 2017).'},
   ];
   document.getElementById('hieGrid').innerHTML = items.map(it => `
-    <div class="hie-card" style="position:relative;overflow:visible;">
-      <span class="info-i" style="position:absolute;top:0.75rem;right:0.75rem;font-size:9px;width:14px;height:14px;">i<span class="tip" style="right:0;left:auto;transform:none;width:220px;">${it.tip}</span></span>
+    <div class="hie-card">
+      <span class="ii" style="position:absolute;top:0.7rem;right:0.7rem;font-size:9px;width:14px;height:14px;">i<span class="tip" style="right:0;left:auto;transform:none;width:200px;">${it.tip}</span></span>
       <div class="hie-icon">${it.icon}</div>
       <div class="hie-label">${it.label}</div>
       <div class="hie-value">${it.value}</div>
@@ -346,175 +420,129 @@ function renderHIE(s) {
     </div>`).join('');
 }
 
-// ── Render progress charts ──
-function renderCharts(sessions, currentIdx) {
-  destroyCharts();
+// ── Progress Charts ──
+function renderCharts(sessions, idx) {
+  chartInstances.forEach(c => c.destroy()); chartInstances = [];
   const title = document.getElementById('progressTitle');
   const grid  = document.getElementById('chartsGrid');
   grid.innerHTML = '';
-  if (sessions.length < 2) { title.style.display = 'none'; return; }
+  if (sessions.length < 2) { title.style.display='none'; return; }
   title.style.display = '';
-
-  const labels = sessions.map(s => s.date + (s.heure ? ' ' + s.heure : ''));
+  const labels = sessions.map(s => s.date + (s.heure?' '+s.heure:''));
   const metrics = [
-    { key:'plMin',     label:'Player Load / min (AU/min)', color:'#00b8d4', icon:'⚡' },
-    { key:'hauteurCm', label:'Best Jump (cm)',              color:'#00e5a0', icon:'🦘' },
-    { key:'rHIE',      label:'HIE / min',                  color:'#ffa502', icon:'🔥' },
-    { key:'rCoD',      label:'CoD / min',                  color:'#5856d6', icon:'🔄' },
-    { key:'rACC',      label:'ACC / min',                  color:'#ff4757', icon:'🚀' },
-    { key:'dureeMin',  label:'Duration (min)',              color:'#a0a0b0', icon:'⏲' },
+    {key:'plCorrige', label:'Player Load corrected (AU/min)', c:'#00b8d4', icon:'⚡'},
+    {key:'hauteurCm', label:'Best Jump (cm)',                  c:'#00e5a0', icon:'🦘'},
+    {key:'activePct', label:'Active Time (%)',                 c:'#9b59b6', icon:'⏲'},
+    {key:'rHIE',      label:'HIE / min',                       c:'#ffa502', icon:'🔥'},
+    {key:'rCoD',      label:'CoD / min',                       c:'#5856d6', icon:'🔄'},
+    {key:'rACC',      label:'ACC / min',                       c:'#ff4757', icon:'🚀'},
   ];
-
   metrics.forEach(m => {
     const data = sessions.map(s => s[m.key]);
-    const card = document.createElement('div');
-    card.className = 'chart-card';
-    const id = 'chart_' + m.key;
+    const card = document.createElement('div'); card.className='chart-card';
+    const id = 'ch_'+m.key;
     card.innerHTML = `<div class="chart-label">${m.icon} ${m.label}</div><canvas id="${id}" style="max-height:140px;"></canvas>`;
     grid.appendChild(card);
-
-    const pointColors = data.map((_, i) => i === currentIdx ? m.color : '#3a3a4a');
-    const pointRadii  = data.map((_, i) => i === currentIdx ? 7 : 4);
-    const pointBorders = data.map((_, i) => i === currentIdx ? '#f0f0f5' : 'transparent');
-
+    const ptColors  = data.map((_,i) => i===idx ? m.c : '#3a3a4a');
+    const ptRadii   = data.map((_,i) => i===idx ? 7 : 4);
+    const ptBorders = data.map((_,i) => i===idx ? '#f0f0f5' : 'transparent');
     const chart = new Chart(document.getElementById(id).getContext('2d'), {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [{
-          data,
-          borderColor: m.color,
-          backgroundColor: m.color + '18',
-          borderWidth: 2,
-          pointBackgroundColor: pointColors,
-          pointRadius: pointRadii,
-          pointBorderColor: pointBorders,
-          pointBorderWidth: 2,
-          tension: 0.35,
-          fill: true,
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { color: '#2a2a35' }, ticks: { color: '#a0a0b0', font: { family:'DM Sans', size:10 }, maxTicksLimit:6 } },
-          y: { grid: { color: '#2a2a35' }, ticks: { color: '#a0a0b0', font: { family:'DM Sans', size:10 } }, beginAtZero: true }
-        }
-      }
+      type:'line',
+      data:{ labels, datasets:[{ data, borderColor:m.c, backgroundColor:m.c+'18', borderWidth:2,
+        pointBackgroundColor:ptColors, pointRadius:ptRadii, pointBorderColor:ptBorders,
+        pointBorderWidth:2, tension:0.35, fill:true }] },
+      options:{ responsive:true, plugins:{legend:{display:false}},
+        scales:{ x:{grid:{color:'#2a2a35'},ticks:{color:'#a0a0b0',font:{size:10},maxTicksLimit:6}},
+                 y:{grid:{color:'#2a2a35'},ticks:{color:'#a0a0b0',font:{size:10}},beginAtZero:true} } }
     });
     chartInstances.push(chart);
   });
 }
 
-// ── Render history table ──
-function renderHistory(sessions, currentIdx) {
-  const tbody = document.getElementById('historyBody');
-  tbody.innerHTML = [...sessions].reverse().map(s => {
-    const isSelected = s.idx === currentIdx;
-    return `
-      <tr class="${isSelected ? 'selected-row' : ''}" onclick="selectSession(${s.idx})">
-        <td>${s.date}</td>
-        <td>${s.heure}</td>
-        <td>${s.dureeMin.toFixed(1)} min</td>
-        <td><strong style="color:#f0f0f5">${s.plMin.toFixed(2)}</strong></td>
-        <td>${s.hauteurCm > 0 ? s.hauteurCm + ' cm' : '—'}</td>
-        <td>${s.airTimeS > 0 ? s.airTimeS.toFixed(3) + 's' : '—'}</td>
-        <td>${s.rACC.toFixed(1)}</td>
-        <td>${s.rDEC.toFixed(1)}</td>
-        <td>${s.rCoD.toFixed(1)}</td>
-        <td>${s.rHIE.toFixed(1)}</td>
-        <td>${loadCategory(s.plMin)}</td>
-      </tr>`;
+// ── History Table ──
+function renderHistory(sessions, idx) {
+  document.getElementById('historyBody').innerHTML = [...sessions].reverse().map(s => {
+    const pill = s.plCorrige < 0.5 ? 'pill-g' : s.plCorrige < 1.5 ? 'pill-a' : 'pill-r';
+    const pillLabel = s.plCorrige < 0.5 ? 'Low' : s.plCorrige < 1.5 ? 'Med' : 'High';
+    return `<tr class="${s.idx===idx?'sel':''}" onclick="selectSession(${s.idx})">
+      <td>${s.date}</td><td>${s.heure}</td>
+      <td>${s.dureeMin.toFixed(1)} min</td>
+      <td>${s.plMin.toFixed(2)}</td>
+      <td><strong style="color:#f0f0f5">${s.plCorrige > 0 ? s.plCorrige.toFixed(3) : '—'}</strong></td>
+      <td>${s.hauteurCm > 0 ? s.hauteurCm+' cm' : '—'}</td>
+      <td>${s.activePct > 0 ? s.activePct+'%' : '—'}</td>
+      <td>${s.rHIE.toFixed(1)}</td>
+      <td><span class="load-pill ${pill}">${pillLabel}</span></td>
+    </tr>`;
   }).join('');
 }
 
-// ── Render tabs ──
-function renderTabs(sessions, currentIdx) {
-  document.getElementById('sessionTabs').innerHTML = sessions.map((s, i) =>
-    `<div class="session-tab ${i === currentIdx ? 'active' : ''}" onclick="selectSession(${i})">
+// ── Tabs ──
+function renderTabs(sessions, idx) {
+  document.getElementById('sessionTabs').innerHTML = sessions.map((s,i) =>
+    `<div class="session-tab ${i===idx?'active':''}" onclick="selectSession(${i})">
       ${s.date}<br><span style="font-size:0.75rem;opacity:0.7;">${s.heure}</span>
-    </div>`
-  ).join('');
+    </div>`).join('');
 }
 
-// ── Main render ──
-let ALL_SESSIONS = [];
-let CURRENT_IDX  = 0;
-
-function selectSession(idx) {
-  CURRENT_IDX = idx;
-  renderAll();
-}
+// ── Main ──
+let ALL_SESSIONS = [], CURRENT_IDX = 0;
+function selectSession(idx) { CURRENT_IDX = idx; renderAll(); }
 
 function renderAll() {
+  destroyCharts();
   const s = ALL_SESSIONS[CURRENT_IDX];
-
   document.getElementById('playerName').textContent = PLAYER_NAME;
   document.getElementById('headerMeta').textContent =
-    new Date(s.date + 'T12:00:00').toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+    new Date(s.date+'T12:00:00').toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
   document.getElementById('sessionBadge').textContent =
-    `Session ${CURRENT_IDX + 1} of ${ALL_SESSIONS.length} · ${s.dureeMin.toFixed(0)} min`;
-
+    `Session ${CURRENT_IDX+1} of ${ALL_SESSIONS.length} · ${s.dureeMin.toFixed(0)} min`;
   renderTabs(ALL_SESSIONS, CURRENT_IDX);
   renderKPI(ALL_SESSIONS, CURRENT_IDX);
+  renderJumps(s);
   renderGauge(s);
+  renderZones(s);
   renderHIE(s);
+  renderProfile(s);
   renderCharts(ALL_SESSIONS, CURRENT_IDX);
   renderHistory(ALL_SESSIONS, CURRENT_IDX);
 }
 
-// ── Load data from Google Sheets CSV ──
 async function loadData() {
   const loading = document.getElementById('loadingScreen');
   const dash    = document.getElementById('dashboard');
-
   if (SHEET_CSV_URL === 'YOUR_PUBLISHED_SHEET_CSV_URL_HERE') {
-    loading.style.display = 'none';
-    dash.style.display = '';
-    dash.innerHTML = `
-      <div class="header"><div class="player-name">Handball Crush</div></div>
-      <div class="config-error">
-        <h2>Setup Required</h2>
-        <p>Open this HTML file in a text editor and replace <code>YOUR_PUBLISHED_SHEET_CSV_URL_HERE</code> with your Google Sheets published CSV URL.</p>
-        <p style="margin-top:1rem;">In Google Sheets : <strong>File → Share → Publish to web → Select sheet → CSV → Publish</strong> → Copy the URL.</p>
-      </div>`;
+    loading.style.display='none'; dash.style.display='';
+    dash.innerHTML=`<div class="header"><div class="player-name">Handball Crush</div></div>
+      <div class="config-error"><h2>Setup Required</h2>
+      <p>Replace <code>YOUR_PUBLISHED_SHEET_CSV_URL_HERE</code> in the HTML with your Google Sheets published CSV URL.</p>
+      <p style="margin-top:1rem;"><strong>Google Sheets → File → Share → Publish to web → CSV → Publish → Copy URL</strong></p></div>`;
     return;
   }
-
   try {
     const resp = await fetch(SHEET_CSV_URL);
-    if (!resp.ok) throw new Error('HTTP ' + resp.status);
-    const text = await resp.text();
-    const rows = parseCSV(text);
-    if (!rows.length) throw new Error('No data found in sheet.');
-
-    ALL_SESSIONS = rows.map((r, i) => rowToSession(r, i));
-    ALL_SESSIONS.sort((a, b) => {
-      // Use chemin (file path) for sort — format: YYYY-MM-DD/HH-MM-SS-mmm/data_0.csv
-      // Fallback to date + heure if chemin is empty
-      const keyA = a.chemin || (a.date + ' ' + a.heure.replace('h','-'));
-      const keyB = b.chemin || (b.date + ' ' + b.heure.replace('h','-'));
-      return keyA > keyB ? 1 : keyA < keyB ? -1 : 0;
+    if (!resp.ok) throw new Error('HTTP '+resp.status);
+    const rows = parseCSV(await resp.text());
+    if (!rows.length) throw new Error('No data found.');
+    ALL_SESSIONS = rows.map((r,i) => rowToSession(r,i));
+    ALL_SESSIONS.sort((a,b) => {
+      const ka = a.chemin || (a.date+' '+a.heure.replace('h','-'));
+      const kb = b.chemin || (b.date+' '+b.heure.replace('h','-'));
+      return ka > kb ? 1 : ka < kb ? -1 : 0;
     });
-    ALL_SESSIONS.forEach((s, i) => { s.idx = i; });
-    CURRENT_IDX  = ALL_SESSIONS.length - 1; // default = latest session
-
-    loading.style.display = 'none';
-    dash.style.display = '';
+    ALL_SESSIONS.forEach((s,i) => { s.idx = i; });
+    CURRENT_IDX = ALL_SESSIONS.length - 1;
+    loading.style.display='none'; dash.style.display='';
     renderAll();
-
   } catch(err) {
-    loading.innerHTML = `
-      <div class="logo">Handball Crush</div>
+    loading.innerHTML=`<div class="logo">Handball Crush</div>
       <div style="background:#1a1a1f;border:1px solid #ff4757;border-radius:16px;padding:1.5rem;max-width:420px;text-align:center;">
         <div style="color:#ff4757;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;margin-bottom:0.5rem;">Connection Error</div>
-        <div style="color:#a0a0b0;font-size:0.85rem;line-height:1.6;">${err.message}<br><br>Make sure your Google Sheet is published to the web as CSV and the URL is correct.</div>
-        <button onclick="location.reload()" style="margin-top:1rem;background:#2a2a35;border:1px solid #3a3a4a;color:#f0f0f5;padding:0.5rem 1.2rem;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;">Retry</button>
+        <div style="color:#a0a0b0;font-size:0.85rem;line-height:1.6;">${err.message}</div>
+        <button onclick="location.reload()" style="margin-top:1rem;background:#2a2a35;border:1px solid #3a3a4a;color:#f0f0f5;padding:0.5rem 1.2rem;border-radius:10px;cursor:pointer;">Retry</button>
       </div>`;
   }
 }
-
 loadData();
 </script>
 </body>
