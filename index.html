@@ -201,8 +201,12 @@ function parseCSV(text) {
 
 function rowToSession(r, idx) {
   let top3 = [], profile = null;
-  try { top3 = JSON.parse((r['Top3 jumps (JSON)'] || '[]').replace(/\|/g, ',')); } catch(e) {}
-  try { profile = JSON.parse((r['Load profile (JSON)'] || 'null').replace(/\|/g, ',')); } catch(e) {}
+  function fixJSON(s) {
+    // Restore | back to commas, then re-quote unquoted keys (Google Sheets strips them)
+    return s.replace(/\|/g, ',').replace(/([{,])\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":');
+  }
+  try { top3 = JSON.parse(fixJSON(r['Top3 jumps (JSON)'] || '[]')); } catch(e) { console.log('top3 parse error:', e, r['Top3 jumps (JSON)']); }
+  try { profile = JSON.parse(fixJSON(r['Load profile (JSON)'] || 'null')); } catch(e) { console.log('profile parse error:', e); }
   return {
     idx, chemin: r['Fichier source'] || '',
     date: r['Date'] || '', heure: r['Heure'] || '',
