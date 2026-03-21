@@ -559,6 +559,12 @@ async function loadData() {
     });
     ALL_SESSIONS.forEach((s,i) => { s.idx = i; });
     CURRENT_IDX = ALL_SESSIONS.length - 1;
+    // Auto-sélection si deep link depuis l'app
+if (sessionParam) {
+    const match = ALL_SESSIONS.findIndex(s =>
+        sessionParam.includes(s.date) && (!s.heure || sessionParam.includes(s.heure)));
+    if (match >= 0) CURRENT_IDX = match;
+}
     loading.style.display='none'; dash.style.display='';
     renderAll();
   } catch(err) {
@@ -570,6 +576,9 @@ async function loadData() {
       </div>`;
   }
 }
+  // Deep link depuis l'app Android
+const urlParams = new URLSearchParams(window.location.search);
+const sessionParam = urlParams.get('session');
 loadData();
 </script>
 </body>
